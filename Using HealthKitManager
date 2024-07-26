@@ -1,0 +1,54 @@
+import UIKit
+
+class ViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Request authorization
+        HealthKitManager.shared.requestAuthorization { success, error in
+            if success {
+                // Read step count
+                HealthKitManager.shared.readStepCount { stepCount, error in
+                    if let stepCount = stepCount {
+                        print("Step count: \(stepCount)")
+                    } else if let error = error {
+                        print("Error reading step count: \(error.localizedDescription)")
+                    }
+                }
+                
+                // Read heart rate
+                HealthKitManager.shared.readHeartRate { heartRateSamples, error in
+                    if let heartRateSamples = heartRateSamples {
+                        for sample in heartRateSamples {
+                            let bpm = sample.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                            print("Heart rate: \(bpm) BPM")
+                        }
+                    } else if let error = error {
+                        print("Error reading heart rate: \(error.localizedDescription)")
+                    }
+                }
+                
+                // Write step count
+                HealthKitManager.shared.writeStepCount(steps: 10000) { success, error in
+                    if success {
+                        print("Successfully wrote step count")
+                    } else if let error = error {
+                        print("Error writing step count: \(error.localizedDescription)")
+                    }
+                }
+                
+                // Write heart rate
+                HealthKitManager.shared.writeHeartRate(heartRate: 75) { success, error in
+                    if success {
+                        print("Successfully wrote heart rate")
+                    } else if let error = error {
+                        print("Error writing heart rate: \(error.localizedDescription)")
+                    }
+                }
+            } else if let error = error {
+                print("Error requesting authorization: \(error.localizedDescription)")
+            }
+        }
+    }
+}
