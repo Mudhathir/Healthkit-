@@ -1,0 +1,24 @@
+extension HealthKitManager {
+    
+    func writeStepCount(steps: Double, date: Date = Date(), completion: @escaping (Bool, Error?) -> Void) {
+        let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+        let quantity = HKQuantity(unit: HKUnit.count(), doubleValue: steps)
+        
+        let stepCountSample = HKQuantitySample(type: stepCountType, quantity: quantity, start: date, end: date)
+        
+        healthStore.save(stepCountSample) { success, error in
+            completion(success, error)
+        }
+    }
+    
+    func writeHeartRate(heartRate: Double, date: Date = Date(), completion: @escaping (Bool, Error?) -> Void) {
+        let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
+        let quantity = HKQuantity(unit: HKUnit(from: "count/min"), doubleValue: heartRate)
+        
+        let heartRateSample = HKQuantitySample(type: heartRateType, quantity: quantity, start: date, end: date)
+        
+        healthStore.save(heartRateSample) { success, error in
+            completion(success, error)
+        }
+    }
+}
