@@ -1,0 +1,21 @@
+import HealthKit
+
+class HealthKitManager {
+    static let shared = HealthKitManager()
+    let healthStore = HKHealthStore()
+
+    // Request authorization to read and write specific data types
+    func requestAuthorization(completion: @escaping (Bool, Error?) -> Void) {
+        let readTypes: Set<HKObjectType> = [
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.quantityType(forIdentifier: .heartRate)!
+        ]
+        
+        let writeTypes: Set<HKSampleType> = [
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.quantityType(forIdentifier: .heartRate)!
+        ]
+        
+        healthStore.requestAuthorization(toShare: writeTypes, read: readTypes, completion: completion)
+    }
+}
