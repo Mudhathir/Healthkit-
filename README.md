@@ -1,4 +1,4 @@
-# HealthKit App
+# Personal Health Dashboard App
 
 This project is a basic HealthKit application written in Swift. It demonstrates how to request authorization to access HealthKit data, and how to read and write basic health metrics such as steps and heart rate.
 
@@ -28,7 +28,7 @@ The HealthKit App aims to provide a simple interface to read and write health da
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Mudhathir/healthkit-.git
+   git clone https://github.com/Mudhathir/Personal-Health-Dashboard.git
 
 
 2. Open the project in Xcode:
