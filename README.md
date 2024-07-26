@@ -28,7 +28,7 @@ The HealthKit App aims to provide a simple interface to read and write health da
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/healthkit-app.git
+   git clone https://github.com/Mudhathir/healthkit-.git
 
 
 2. Open the project in Xcode:
